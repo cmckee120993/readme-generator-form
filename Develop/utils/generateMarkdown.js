@@ -24,59 +24,67 @@ function renderLicenseSection(license) {
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-  let draftTOC = `## Table of Contents`
+  let draftTOC = `\n ## Table of Contents`
 
   if (data.installation !== '') {
-    draftTOC += `* Installation`
+    draftTOC += `\n * Installation`
   };
 
   if (data.usage !== '') {
-    draftTOC += `* Usage`
+    draftTOC += `\n * Usage`
   };
 
   if (data.license !== 'None') {
-    draftTOC += `* License`
+    draftTOC += `\n * License`
   };
 
   if (data.contributing !== '') {
-    draftTOC += `* Contributing`
+    draftTOC += `\n * Contributing`
   };
 
   if (data.tests !== '') {
-    draftTOC += `* Tests`
+    draftTOC += `\n * Tests`
   };
 
-  return `
-  # <${data.title}>
+  let draftMarkdown = 
+  `# ${data.title}\n 
 
-  ##Creator Info
-  ${data.username}
+  \n ##Creator Info
+  \n ${data.username}
+  \n ${data.email}\n 
 
-  ${data.email}
+  \n ## Description
+  \n ${data.description}\n `;
 
-  ## Description
+  if (draftTOC !== 'No') {
+    draftMarkdown += draftTOC
+  };
   
-  ${data.description}
-  
-  ## Installation
-  
-  ${data.install}
-  
-  ## Usage
-  
-  ${data.usage}
+  if(data.installation !== '') {
+  draftMarkdown += 
+  `\n \n ## Installation
+  \n ${data.install}`
+  };
+
+  if(data.usage !== '') {
+    draftMarkdown +=
+  `\n \n ## Usage
+  \n ${data.usage}`
+};
 
   
-  ${data.license}
+  // ${data.license}
   
-  ## How to Contribute
+  if(data.contribute !== '') {
+  `\n \n ## How to Contribute
+  \n ${data.contribute}`};
   
-  ${data.contribute}
-  
-  ## Tests
-  
-  ${data.tests}
-`;
-}
+  if(data.tests !== '') {
+  `\n \n ## Tests
+  \n ${data.tests}`
+};
+
+return draftMarkdown;
+};
 
 module.exports = generateMarkdown;

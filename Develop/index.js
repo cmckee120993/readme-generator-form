@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown.js');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -21,6 +21,11 @@ type: 'input' },
 { name: 'desciption',
 message: 'Write a short description for your project.',
 type: 'input'},
+
+{ name: 'TOC',
+message: 'Select "No" for no Table of Contents. Otherwise, select what elements you will be including in your README.',
+type: 'checkbox',
+choices: ['No', 'Installation', 'Usage', 'Contributing', 'Tests']},
 
 {name: 'license',
 message: 'What kind of license should your project have?',
@@ -57,20 +62,13 @@ function writeToFile(fileName, data) {
 };
 
 // TODO: Create a function to initialize app
-function init() {
-  inquirer.prompt(questions)
-  .then( answers => {
-   return answers;
-  })
-  .then(data => {
-    generateMarkDown(data)
-  })
-  .catch((error) => {
-    if (error.isTtyError) {
-      console.log('sorry ):')
-    };
-  });
+async function init() {
+  const userResponses = await inquirer.prompt(questions);
+
+  const markdown = generateMarkdown(userResponses);
+  
+  await writeToFile('new-README.md', markdown)
 };
 
-// Function call to initialize app
+
 init();
