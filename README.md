@@ -26,5 +26,7 @@
  ## Program in Use
 [![Watch the video](./assets/images/readme-gen-screenshot.png)](https://drive.google.com/file/d/1sIMBOmdo1Dzw_vUq7Vm6vO_takrPy3PF/view)
 
+Click on the screenshot above to be taken to a video recording of this project in action. 
+
  ### Note
  Except for the video of the site being used and this final note, this README was created using the README generator! 
